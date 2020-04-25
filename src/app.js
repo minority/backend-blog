@@ -77,6 +77,16 @@ app.post('/auth', (request, response) => {
   response.json({ status: true, user });
 });
 
+app.get('/post', (request, response) => {
+  const index = posts.findIndex((p) => +p.id === +request.query.id);
+
+  if (index === -1) {
+    response.status(404).json({ status: false, message: 'Post not found' });
+  }
+
+  response.json(posts[index]);
+});
+
 app.get('/posts', (request, response) => {
   response.json(posts);
 });
@@ -98,6 +108,18 @@ app.put('/posts', (request, response) => {
   posts[index].content = request.body.content;
 
   response.json({ status: true, post: posts[index] });
+});
+
+app.delete('/posts', (request, response) => {
+  const index = posts.findIndex((p) => +p.id === +request.query.id);
+
+  if (index === -1) {
+    response.status(404).json({ status: false, message: 'Post not found' });
+  }
+
+  posts.splice(index, 1);
+
+  response.status(204).end();
 });
 
 app.use('*', (request, response) => {

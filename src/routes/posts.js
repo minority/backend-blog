@@ -9,5 +9,4 @@ router.post('/posts', PostsController.create);
 router.put('/posts/:id', PostsController.update);
 router.delete('/posts/:id', PostsController.delete);
 
-
 export default router;

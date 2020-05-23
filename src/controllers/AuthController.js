@@ -2,6 +2,7 @@ import User from '../models/User';
 import TryCatch from '../decorators/TryCatchMiddlewareDecorator';
 import HttpError from '../exeptions/HttpError';
 import { hashPassword, checkPassword } from '../helpers/password';
+import { createAuthToken } from '../helpers/auth';
 
 
 class AuthController {
@@ -14,7 +15,11 @@ class AuthController {
       throw new HttpError('Incorrect login or password', 401);
     }
 
-    res.json({ status: true, user });
+    /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
+    const authToken = await createAuthToken({ id: user._id.toString() });
+    delete user.password;
+
+    res.json({ status: true, user, authToken });
   }
 
   @TryCatch

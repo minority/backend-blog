@@ -1,8 +1,9 @@
-# Appliction api Express.js for React.js blog
+# Appliction api for React.js blog
 
-## Description project
+## Данный приложение реализовано для hibrain.ru по курсу (Fullstack-разработка на JavaScript) что бы познакомить студентов с разнаботкой на Node.js.
 
-### Stack
+## Используемый технологии
 - Node.js
 - Express
+- MongoDb
 
